@@ -1,11 +1,12 @@
 const express = require ('express')
+const bcrypt = require ('bcryptjs')
 const {usersDB} = require ('../DB') 
 const {usersSchemas} = require ('../schemas')
 const {mobileNumber} = require ('../functions')
 
 const route = express.Router()
 
-route.post('/api/user/reg', (req, res) => {
+route.post('/api/user/reg', async (req, res) => {
    
     const result = usersSchemas(req.body)
     
@@ -13,10 +14,15 @@ route.post('/api/user/reg', (req, res) => {
         return res.status(400).send(result.error.details[0].message)
     } 
         const newUser = req.body
-        newUser.id = usersDB.length + 1,
-        newUser.country = req.body.country,
-        newUser.registeredCourse = newUser.courseRegistration.length,
+        newUser.id = usersDB.length + 1
+        newUser.country = req.body.country
+        newUser.password = req.body.password
+        newUser.registeredCourse = newUser.courseRegistration.length
         newUser.phoneNumber = mobileNumber(newUser.country, newUser.mobileNumber)
+
+        const hash = await bcrypt.hash(req.body.password, 10)
+
+        newUser.password = hash
 
         delete newUser.mobileNumber
 

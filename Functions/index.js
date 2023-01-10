@@ -1,5 +1,13 @@
 const {usersDB, teachersDB, coursesDB} = require ('../DB')
-const {courseCheck} = require ('../Functions')
+const {courseCheck} = require ('../Schemas')
+
+// Check if a teacher is entitled to bonus
+
+const isEntitledToBonus = (input) => {
+    if (input.length >= 4) return true 
+
+    return false
+}
 
 // validate phone number
 
@@ -9,7 +17,7 @@ mobileNumber = (country, mobile)=> {
         let number;
         if(numToArray[0] == 0) {
             numToArray.splice(0, 1)
-        console.log("number.join", numToArray.join(''));   
+        // console.log("number.join", numToArray.join(''));   
         return (`+234` + numToArray.join("")) 
 
     }  else if (numToArray.slice(0,3) === 2,3,4 && numToArray.length === 13) {
@@ -92,5 +100,6 @@ input.map(x => {
         mobileNumber,
         registeredStudents,
         names,
-        numberOfRegisteredStudents
+        numberOfRegisteredStudents,
+        isEntitledToBonus
     }
