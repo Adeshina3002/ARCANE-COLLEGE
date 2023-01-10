@@ -1,7 +1,7 @@
 # ARCANE COLLEGE 
 ***
 
-#### This is a school based system that tracks all of it's students, teachers and courses.
+## This is a school based system that tracks all of it's students, teachers and courses.
 
 
 * **It wants to keep tracks of what courses are offered, who teaches each course and the students enrolled for each courses**
