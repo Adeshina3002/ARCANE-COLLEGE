@@ -1,4 +1,5 @@
 const {usersDB, teachersDB, coursesDB} = require ('../DB')
+
 const {courseCheck} = require ('../Schemas')
 
 // Check if a teacher is entitled to bonus
@@ -26,7 +27,7 @@ mobileNumber = (country, mobile)=> {
     }}
 
 
-    // This function is to count the number of registered students for a particular course in the usersDB
+// This function is to count the number of registered students for a particular course in the usersDB
 
 let count = 0;
 // let checkCourse = "Mth 305" //checkCourse has been replaced with courseCheck to accept input from the client through the Joi schema
@@ -34,6 +35,7 @@ const registeredStudents = (input) => {
     input.filter (function (course) {
 
         for (let i = 0; i < course.courseRegistration.length; i++) {
+
             if (course.courseRegistration[i] === courseCheck) {
                 count++
                 
@@ -46,9 +48,9 @@ const registeredStudents = (input) => {
 // console.log(count);
 
 
-const numberOfRegisteredStudents = ((input) => {
+const numberOfRegisteredStudents = ((input1, courseCheck) => {
         
-    input.map((courses) => {            //checking through the courseDB
+    input1.map((courses) => {            //checking through the courseDB
         
         if (courses.courseCode  === courseCheck) {
             // console.log("courses courseCode :",courses.courseCode);
@@ -64,31 +66,42 @@ const numberOfRegisteredStudents = ((input) => {
 })
 
 
-const names = (input, users) => {
-input.map(x => {
-    for (let i = 0; i < x.courseInCharge.length; i++) {
-    if (x.courseInCharge[i] === courseCheck) {
+// const names = (input, courseCheck, users) => {
+// input.find(x => {
+//     for (let i = 0; i < x.courseInCharge.length; i++) {
+//     if (x.courseInCharge[i] === courseCheck) {
+//         console.log("OKAAAAAY");
 
-        let name = `${x.firstName} ${x.lastName}`
-        let id = x.id
+//         // let name = `${users.firstName} ${users.lastName}`
+//         // let id = users.id
+//         // let email = users.email
     
-    console.log({id,name});
-        users.map(x => {
-                for (let i = 0; i < x.courseRegistration.length; i++) {
-                    if (x.courseRegistration[i] === courseCheck) {
+//     // console.log({id,name});
+//         // users.map(x => {
+//         //         for (let i = 0; i < x.courseRegistration.length; i++) {
+//         //             if (x.courseRegistration[i] === courseCheck) {
 
-                        let studentName = `${x.firstName} ${x.lastName}`;
-                        let studentEmail = x.email;
-                        let studentID = x.id
-                        console.log([{studentName, studentEmail, studentID}]);
-
+//         //                 let studentName = name;
+//         //                 let studentEmail = email;
+//         //                 let studentID = id
+//         //                 console.log([{studentName, studentEmail, studentID}]);
+//         //                 return ([{studentName, studentEmail, studentID}])
                         
-                    }
-                } 
-        })
-    }
-    }
-})
+//         //             }
+//         //         } 
+//         // })
+//         for (user of users) {
+//             console.log({
+                
+//             });
+//         }
+//     }
+//     }
+// })
+// }
+
+const names = (input, courseCheck) => {
+   input.find (x => x.courseIncharge)
 }
 
 
